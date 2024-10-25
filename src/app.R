@@ -1,11 +1,10 @@
 library(shiny)
 
+install.packages("remotes")
+remotes::install_github("maurolepore/private", auth_token = Sys.getenv("GITHUB_PAT"))
+
 ui <- fluidPage(
-  # private::greet()
-  paste(
-    "APPTEST:", Sys.getenv("APPTEST"),
-    "TESTAPP:", Sys.getenv("TESTAPP")
-  )	
+  private::greet()
 )
 
 # Define server logic required to draw a histogram
