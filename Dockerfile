@@ -4,12 +4,6 @@ FROM rocker/tidyverse:4.4.1
 # copy the files from this repo to the image
 COPY /src /
 
-# Define a build argument for the GitHub PAT
-ARG GITHUB_PAT
-
-# Set the GitHub PAT as an environment variable inside the container
-ENV GITHUB_PAT=${GITHUB_PAT}
-
 # install the needed R packages
 RUN Rscript setup.R
 
