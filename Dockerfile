@@ -4,9 +4,6 @@ FROM rocker/tidyverse:4.4.1
 ARG GITHUB_PAT
 ENV GITHUB_PAT=${GITHUB_PAT}
 
- RUN R -e "install.packages('remotes')"                                                                                                       
- RUN R -e "remotes::install_github('maurolepore/private', auth_token = Sys.getenv('GITHUB_PAT'))"
-
 # copy the files from this repo to the image
 COPY /src /
 
