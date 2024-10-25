@@ -1,6 +1,9 @@
 # choose the image to start from (this has R 4.4.1 and tidyverse)
 FROM rocker/tidyverse:4.4.1
 
+ARG GITHUB_PAT
+ENV GITHUB_PAT=${GITHUB_PAT}
+
 # copy the files from this repo to the image
 COPY /src /
 
