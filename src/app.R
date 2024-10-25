@@ -1,7 +1,7 @@
 library(shiny)
 
-install.packages("remotes")
-remotes::install_github("maurolepore/private", auth_token = Sys.getenv("GITHUB_PAT"))
+install.packages("pak")
+pak::pak("maurolepore/private")
 
 ui <- fluidPage(
   private::greet()
