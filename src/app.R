@@ -1,7 +1,7 @@
 library(shiny)
 
 ui <- fluidPage(
-  paste("Output: '", Sys.getenv("APPTEST"), "'") 
+  private::greet() 
 )
 
 # Define server logic required to draw a histogram
