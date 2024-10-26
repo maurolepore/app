@@ -3,6 +3,8 @@ steps:
     args:
       - build
       - '--no-cache'
+      - '--build-arg'
+      - 'GITHUB_PAT=$$GITHUB_PAT'
       - '-t'
       - >-
         $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
@@ -10,6 +12,7 @@ steps:
       - '-f'
       - Dockerfile
     id: Build
+    secretEnv: ['GITHUB_PAT']
   - name: gcr.io/cloud-builders/docker
     args:
       - push
@@ -31,6 +34,10 @@ steps:
       - '--quiet'
     id: Deploy
     entrypoint: gcloud
+availableSecrets:
+  secretManager:
+  - versionName: projects/202427698835/secrets/GITHUB_TOKEN
+    env: 'GITHUB_PAT'
 images:
   - >-
     $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
