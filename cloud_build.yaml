@@ -36,7 +36,7 @@ steps:
     entrypoint: gcloud
 availableSecrets:
   secretManager:
-  - versionName: projects/202427698835/secrets/GITHUB_TOKEN
+  - versionName: projects/202427698835/secrets/GITHUB_TOKEN/versions/1
     env: 'GITHUB_PAT'
 images:
   - >-
