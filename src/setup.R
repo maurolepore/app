@@ -1,1 +1,3 @@
-install.packages("shiny")
+install.packages("pak")
+pak::pak("shiny")
+

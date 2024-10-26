@@ -1,6 +1,5 @@
 library(shiny)
 
-install.packages("pak")
 pak::pak("maurolepore/private")
 
 ui <- fluidPage(
