@@ -1,11 +1,19 @@
-# choose the image to start from (this has R 4.4.1 and tidyverse)
-FROM rocker/tidyverse:4.4.1
+FROM rocker/tidyverse:4.4.1 AS build_stage
 
-# copy the files from this repo to the image
+ARG GITHUB_PAT
+ENV GITHUB_PAT=${GITHUB_PAT}
+
+RUN Rscript -e "install.packages('pak')"
+
+RUN Rscript -e "pak::pak('maurolepore/private')"
+
+FROM rocker/tidyverse:4.4.1 AS final_stage
+
+COPY --from=build_stage /usr/local/lib/R/site-library /usr/local/lib/R/site-library
+
+COPY --from=build_stage /usr/local/lib/R/library /usr/local/lib/R/library
+
 COPY /src /
-
-# install the needed R packages
-RUN Rscript setup.R
 
 # run shiny that is open on the port 80 (HTTP) to external traffic (host)
 ENTRYPOINT ["Rscript","main.R"]
